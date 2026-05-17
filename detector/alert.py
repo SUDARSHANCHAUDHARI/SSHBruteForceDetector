@@ -1,10 +1,18 @@
-"""Alert module for SSH Brute-Force Detection."""
+"""Alert formatting for SSH brute-force findings."""
+
+from __future__ import annotations
 
 
-def main() -> None:
-    """Placeholder entry point."""
-    raise NotImplementedError("Implement alert logic")
+def format_alert(finding: dict) -> str:
+    """Return a concise operator alert."""
+    evidence = finding.get("evidence", {})
+    users = ", ".join(evidence.get("users", []))
+    return (
+        f"[{finding.get('severity', 'unknown').upper()}] {finding.get('summary')} "
+        f"ip={evidence.get('ip')} failures={evidence.get('failed_attempts')} users={users}"
+    )
 
 
-if __name__ == "__main__":
-    main()
+def format_alerts(findings: list[dict]) -> list[str]:
+    """Return formatted alerts for all findings."""
+    return [format_alert(finding) for finding in findings]

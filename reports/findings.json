@@ -1,0 +1,21 @@
+[
+  {
+    "kind": "ssh.bruteforce",
+    "severity": "high",
+    "summary": "Repeated failed SSH logins from one IP.",
+    "evidence": {
+      "ip": "198.51.100.22",
+      "failed_attempts": 3,
+      "users": [
+        "admin",
+        "deploy",
+        "root"
+      ],
+      "ports": [
+        50122,
+        50124,
+        50128
+      ]
+    }
+  }
+]
