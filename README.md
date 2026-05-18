@@ -48,13 +48,30 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 - Parses Linux auth log failed and successful SSH login events.
 - Counts failed logins by source IP.
 - Detects repeated failed attempts above a configurable threshold.
+- Escalates fast attack windows and successful logins after repeated failures.
 - Generates formatted alerts.
-- Writes dashboard-friendly JSON summaries and a Markdown report.
+- Writes dashboard-friendly JSON summaries, IP timeline, Markdown report, and triage handoff.
+
+## Demo Artifacts
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Security notes](docs/SECURITY_NOTES.md)
+- [Demo walkthrough](docs/DEMO.md)
+- [Release notes](docs/RELEASE_NOTES.md)
+- [Sample report](reports/report.md)
+- [Sample triage report](reports/triage.md)
+- [Sample IP timeline](reports/ip-timeline.json)
+
+## Docker Demo
+
+```bash
+docker compose run --rm ssh-bruteforce-demo
+```
 
 ## Roadmap
 
-- Polish sample output screenshots or terminal demos
-- Add architecture diagram and deeper implementation notes
-- Expand test coverage around edge cases
-- Add Docker or local demo workflow where useful
-- Prepare `v0.1.0-mvp` release notes
+- Add syslog year inference and timezone handling.
+- Add allowlist/suppression support for trusted admin IPs.
+- Add JSONL streaming mode for larger auth logs.
+- Add Slack/webhook alert delivery.
+- Prepare GitHub release `v0.1.0-mvp`.

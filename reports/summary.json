@@ -1,8 +1,19 @@
 {
-  "total_events": 6,
+  "total_events": 7,
   "failed_logins": 5,
-  "successful_logins": 1,
-  "alerts": 1,
+  "successful_logins": 2,
+  "alerts": 2,
+  "unique_failed_users": [
+    "admin",
+    "deploy",
+    "oracle",
+    "root",
+    "test"
+  ],
+  "by_severity": {
+    "critical": 2
+  },
+  "highest_severity": "critical",
   "top_failed_ips": [
     {
       "ip": "198.51.100.22",

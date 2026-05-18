@@ -1,0 +1,35 @@
+[
+  {
+    "ip": "198.51.100.22",
+    "first_seen": "May 17 10:00:01",
+    "last_seen": "May 17 10:00:20",
+    "failed_logins": 3,
+    "successful_logins": 1,
+    "users": [
+      "admin",
+      "deploy",
+      "root"
+    ]
+  },
+  {
+    "ip": "203.0.113.10",
+    "first_seen": "May 17 10:05:17",
+    "last_seen": "May 17 10:05:17",
+    "failed_logins": 0,
+    "successful_logins": 1,
+    "users": [
+      "kiosk"
+    ]
+  },
+  {
+    "ip": "203.0.113.77",
+    "first_seen": "May 17 10:00:12",
+    "last_seen": "May 17 10:00:17",
+    "failed_logins": 2,
+    "successful_logins": 0,
+    "users": [
+      "oracle",
+      "test"
+    ]
+  }
+]

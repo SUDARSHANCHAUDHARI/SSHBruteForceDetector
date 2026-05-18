@@ -6,6 +6,20 @@ import re
 from pathlib import Path
 
 
+MONTHS = {
+    "Jan": 1,
+    "Feb": 2,
+    "Mar": 3,
+    "Apr": 4,
+    "May": 5,
+    "Jun": 6,
+    "Jul": 7,
+    "Aug": 8,
+    "Sep": 9,
+    "Oct": 10,
+    "Nov": 11,
+    "Dec": 12,
+}
 FAILED_RE = re.compile(
     r"(?P<timestamp>\w+\s+\d+\s+[\d:]+).*Failed password for(?: invalid user)? "
     r"(?P<user>\S+) from (?P<ip>[\d.]+) port (?P<port>\d+)"
@@ -14,6 +28,13 @@ ACCEPTED_RE = re.compile(
     r"(?P<timestamp>\w+\s+\d+\s+[\d:]+).*Accepted password for (?P<user>\S+) "
     r"from (?P<ip>[\d.]+) port (?P<port>\d+)"
 )
+
+
+def timestamp_to_seconds(timestamp: str) -> int:
+    """Return rough seconds from auth-log timestamp for same-year ordering."""
+    month, day, clock = timestamp.split()
+    hour, minute, second = [int(part) for part in clock.split(":")]
+    return (((MONTHS.get(month, 1) * 31 + int(day)) * 24 + hour) * 60 + minute) * 60 + second
 
 
 def parse_auth_log(text: str) -> list[dict]:
@@ -29,6 +50,7 @@ def parse_auth_log(text: str) -> list[dict]:
                     "user": failed.group("user"),
                     "ip": failed.group("ip"),
                     "port": int(failed.group("port")),
+                    "timestamp_seconds": timestamp_to_seconds(failed.group("timestamp")),
                     "raw": line,
                 }
             )
@@ -42,6 +64,7 @@ def parse_auth_log(text: str) -> list[dict]:
                     "user": accepted.group("user"),
                     "ip": accepted.group("ip"),
                     "port": int(accepted.group("port")),
+                    "timestamp_seconds": timestamp_to_seconds(accepted.group("timestamp")),
                     "raw": line,
                 }
             )

@@ -19,8 +19,9 @@ class ParserTests(unittest.TestCase):
         successful = [event for event in events if event["event_type"] == "successful_login"]
 
         self.assertEqual(len(failed), 5)
-        self.assertEqual(len(successful), 1)
+        self.assertEqual(len(successful), 2)
         self.assertEqual(failed[0]["ip"], "198.51.100.22")
+        self.assertIn("timestamp_seconds", failed[0])
 
 
 if __name__ == "__main__":

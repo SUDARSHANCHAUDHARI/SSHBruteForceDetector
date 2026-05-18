@@ -5,6 +5,7 @@
     "user": "admin",
     "ip": "198.51.100.22",
     "port": 50122,
+    "timestamp_seconds": 14896801,
     "raw": "May 17 10:00:01 kiosk-01 sshd[1201]: Failed password for invalid user admin from 198.51.100.22 port 50122 ssh2"
   },
   {
@@ -13,6 +14,7 @@
     "user": "root",
     "ip": "198.51.100.22",
     "port": 50124,
+    "timestamp_seconds": 14896804,
     "raw": "May 17 10:00:04 kiosk-01 sshd[1204]: Failed password for invalid user root from 198.51.100.22 port 50124 ssh2"
   },
   {
@@ -21,7 +23,17 @@
     "user": "deploy",
     "ip": "198.51.100.22",
     "port": 50128,
+    "timestamp_seconds": 14896808,
     "raw": "May 17 10:00:08 kiosk-01 sshd[1207]: Failed password for deploy from 198.51.100.22 port 50128 ssh2"
+  },
+  {
+    "event_type": "successful_login",
+    "timestamp": "May 17 10:00:20",
+    "user": "deploy",
+    "ip": "198.51.100.22",
+    "port": 50128,
+    "timestamp_seconds": 14896820,
+    "raw": "May 17 10:00:20 kiosk-01 sshd[1209]: Accepted password for deploy from 198.51.100.22 port 50128 ssh2"
   },
   {
     "event_type": "failed_login",
@@ -29,6 +41,7 @@
     "user": "test",
     "ip": "203.0.113.77",
     "port": 50200,
+    "timestamp_seconds": 14896812,
     "raw": "May 17 10:00:12 kiosk-01 sshd[1210]: Failed password for invalid user test from 203.0.113.77 port 50200 ssh2"
   },
   {
@@ -37,6 +50,7 @@
     "user": "oracle",
     "ip": "203.0.113.77",
     "port": 50201,
+    "timestamp_seconds": 14896817,
     "raw": "May 17 10:00:17 kiosk-01 sshd[1212]: Failed password for invalid user oracle from 203.0.113.77 port 50201 ssh2"
   },
   {
@@ -45,6 +59,7 @@
     "user": "kiosk",
     "ip": "203.0.113.10",
     "port": 50911,
+    "timestamp_seconds": 14897117,
     "raw": "May 17 10:05:17 kiosk-01 sshd[1218]: Accepted password for kiosk from 203.0.113.10 port 50911 ssh2"
   }
 ]

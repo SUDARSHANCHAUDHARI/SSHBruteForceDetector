@@ -1,7 +1,7 @@
 [
   {
     "kind": "ssh.bruteforce",
-    "severity": "high",
+    "severity": "critical",
     "summary": "Repeated failed SSH logins from one IP.",
     "evidence": {
       "ip": "198.51.100.22",
@@ -15,7 +15,19 @@
         50122,
         50124,
         50128
-      ]
+      ],
+      "window_seconds": 7
+    }
+  },
+  {
+    "kind": "ssh.success_after_failures",
+    "severity": "critical",
+    "summary": "Successful SSH login followed repeated failures from the same IP.",
+    "evidence": {
+      "ip": "198.51.100.22",
+      "successful_user": "deploy",
+      "failed_attempts": 3,
+      "minutes_after_last_failure": 0.2
     }
   }
 ]

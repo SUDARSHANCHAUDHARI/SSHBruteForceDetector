@@ -7,9 +7,12 @@ def format_alert(finding: dict) -> str:
     """Return a concise operator alert."""
     evidence = finding.get("evidence", {})
     users = ", ".join(evidence.get("users", []))
+    user_note = f" users={users}" if users else ""
+    if evidence.get("successful_user"):
+        user_note = f" successful_user={evidence['successful_user']}"
     return (
         f"[{finding.get('severity', 'unknown').upper()}] {finding.get('summary')} "
-        f"ip={evidence.get('ip')} failures={evidence.get('failed_attempts')} users={users}"
+        f"ip={evidence.get('ip')} failures={evidence.get('failed_attempts')}{user_note}"
     )
 
 
