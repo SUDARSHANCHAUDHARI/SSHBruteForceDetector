@@ -1,79 +1,88 @@
 # SSH Brute-Force Detector
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Status](https://img.shields.io/badge/status-MVP-green)](#) [![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](#requirements)
+[![Status](https://img.shields.io/badge/status-MVP-green)](#status)
+[![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#safe-use)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Linux auth log detector for repeated SSH failed-login attacks and alert summaries.
+Linux auth log detector for repeated SSH failed-login attacks. Parses `auth.log`, scores brute-force activity per source IP, and emits actionable alerts.
 
-- **Portfolio group:** Cybersecurity lab project
-- **Status:** MVP implemented, tested, committed, and pushed to GitHub
-- **GitHub:** https://github.com/SUDARSHANCHAUDHARI/SSHBruteForceDetector
-- **Local path:** `/Users/screencloudsudarshan/SUDARSHAN_CODE/sudarshan_repos/CyberSecurity/SSHBruteForceDetector`
+---
 
-## MVP Snapshot
+## Overview
 
-This repository includes a working MVP with safe sample data, deterministic detection or analysis logic, local tests, and generated output reports where relevant. It is ready for README/demo polish or deeper product work.
+SSH Brute-Force Detector is a defensive analysis tool that reads Linux SSH auth logs and detects brute-force patterns: high-volume failed logins, fast attack windows, and successful logins immediately after a string of failures. Outputs include Markdown reports, JSON summaries, IP timelines, and a triage handoff for analysts.
 
-## Safe Use
+## Features
 
-This project is defensive and analysis-focused. Use only with logs, systems, repositories, and lab environments you own or have permission to assess.
+- Parses Linux `auth.log` failed and successful SSH login events
+- Counts failed logins by source IP
+- Detects repeated failed attempts above a configurable threshold
+- Escalates fast attack windows and successful logins after repeated failures
+- Generates formatted terminal alerts with recommended actions
+- Writes JSON summaries, IP timeline, Markdown report, and triage handoff
 
-## Core Features
+## Requirements
 
-- read /var/log/auth.log sample
-- count failed logins by IP
-- detect repeated attempts
-- generate alert
-- dashboard summary
+- Python 3.10 or newer
+- Linux, macOS, or Windows
+- No third-party Python packages (standard library only)
+- Optional: Docker for the demo container
 
-## Status
-
-Working CLI MVP.
-
-
-## Install
+## Installation
 
 ```bash
+git clone https://github.com/SUDARSHANCHAUDHARI/SSHBruteForceDetector.git
+cd SSHBruteForceDetector
 pip install .
 ```
 
-This registers the `ssh-brute-detector` command. Or run directly:
+This registers the `ssh-brute-detector` CLI command.
+
+To run without installing:
 
 ```bash
 python3 main.py --help
 ```
 
-## Quick Start
+## Usage
 
 Analyze the included sample auth log:
 
 ```bash
-python3 dashboard/app.py --log data/sample-auth.log --threshold 3 --out-dir reports
+python3 main.py --log data/sample-auth.log --threshold 3 --out-dir reports
 ```
 
-Run tests:
+Generated outputs in `reports/`:
+
+- `events.json` — parsed auth events
+- `findings.json` — detected brute-force findings
+- `summary.json` — dashboard-friendly summary
+- `ip-timeline.json` — per-IP activity timeline
+- `report.md` — full Markdown detection report
+- `triage.md` — analyst triage checklist
+
+## Project Structure
+
+```
+SSHBruteForceDetector/
+├── dashboard/      CLI dashboard (entrypoint)
+├── detector/       Parser, rules, alert formatting
+├── data/           Safe sample auth log
+├── reports/        Example generated output
+├── docker/         Dockerfile + compose support
+├── docs/           Architecture, security notes, demo
+├── tests/          Unit tests
+├── main.py         CLI entrypoint
+├── pyproject.toml  Package metadata
+└── LICENSE
+```
+
+## Testing
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
-
-## MVP Capabilities
-
-- Parses Linux auth log failed and successful SSH login events.
-- Counts failed logins by source IP.
-- Detects repeated failed attempts above a configurable threshold.
-- Escalates fast attack windows and successful logins after repeated failures.
-- Generates formatted alerts.
-- Writes dashboard-friendly JSON summaries, IP timeline, Markdown report, and triage handoff.
-
-## Demo Artifacts
-
-- [Architecture](docs/ARCHITECTURE.md)
-- [Security notes](docs/SECURITY_NOTES.md)
-- [Demo walkthrough](docs/DEMO.md)
-- [Release notes](docs/RELEASE_NOTES.md)
-- [Sample report](reports/report.md)
-- [Sample triage report](reports/triage.md)
-- [Sample IP timeline](reports/ip-timeline.json)
 
 ## Docker Demo
 
@@ -81,10 +90,29 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 docker compose run --rm ssh-bruteforce-demo
 ```
 
+## Safe Use
+
+This project is defensive and analysis-focused. Use only with logs, systems, and lab environments you own or have explicit written permission to assess. The included sample log is synthetic and safe for public demo use.
+
+## Status
+
+Working CLI MVP with tests, demo data, and Docker support.
+
 ## Roadmap
 
-- Add syslog year inference and timezone handling.
-- Add allowlist/suppression support for trusted admin IPs.
-- Add JSONL streaming mode for larger auth logs.
-- Add Slack/webhook alert delivery.
-- Prepare GitHub release `v0.1.0-mvp`.
+- Syslog year inference and timezone handling
+- Allowlist / suppression support for trusted admin IPs
+- JSONL streaming mode for larger auth logs
+- Slack / webhook alert delivery
+- GitHub release `v0.1.0-mvp`
+
+## License
+
+Released under the [MIT License](LICENSE). You are free to use, modify, and distribute this software with attribution.
+
+## Author
+
+**Sudarshan Chaudhari** — [SudarshanTechLabs](https://github.com/SUDARSHANCHAUDHARI)
+Bangkok, Thailand
+
+For inquiries: open an issue on [GitHub](https://github.com/SUDARSHANCHAUDHARI/SSHBruteForceDetector/issues).
