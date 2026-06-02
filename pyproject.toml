@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "sshbruteforcedetector"
+version = "1.0.0"
+description = "Linux auth log detector for repeated SSH failed-login attacks and alert summaries"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+
+[project.scripts]
+ssh-brute-detector = "dashboard.app:main"
