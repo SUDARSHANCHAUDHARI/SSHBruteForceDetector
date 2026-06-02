@@ -12,3 +12,9 @@ requires-python = ">=3.10"
 
 [project.scripts]
 ssh-brute-detector = "dashboard.app:main"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["dashboard*", "detector*"]
