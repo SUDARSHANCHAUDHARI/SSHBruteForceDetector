@@ -36,7 +36,12 @@ def timestamp_to_seconds(timestamp: str, year: int | None = None) -> int:
     """Return epoch seconds for a year-less auth-log timestamp (default: current year)."""
     month, day, clock = timestamp.split()
     hour, minute, second = [int(part) for part in clock.split(":")]
-    when = datetime(year or datetime.now().year, MONTHS.get(month, 1), int(day), hour, minute, second)
+    year = year or datetime.now().year
+    if month == "Feb" and int(day) == 29:
+        # Feb 29 only exists in a leap year, so the line is from the latest one.
+        while not calendar.isleap(year):
+            year -= 1
+    when = datetime(year, MONTHS.get(month, 1), int(day), hour, minute, second)
     return calendar.timegm(when.timetuple())
 
 

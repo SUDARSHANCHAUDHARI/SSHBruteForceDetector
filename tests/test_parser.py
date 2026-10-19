@@ -38,6 +38,11 @@ class ParserTests(unittest.TestCase):
 
         self.assertEqual(accepted["timestamp_seconds"] - failed["timestamp_seconds"], 600)
 
+    def test_feb_29_in_non_leap_year_uses_latest_leap_year(self) -> None:
+        gap = timestamp_to_seconds("Mar 1 00:00:10", 2024) - timestamp_to_seconds("Feb 29 23:59:50", 2026)
+
+        self.assertEqual(gap, 20)
+
 
 if __name__ == "__main__":
     unittest.main()
